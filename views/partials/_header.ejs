@@ -1,0 +1,21 @@
+<head>
+  <title> Tiny App </title>
+</head>
+<h3> Tiny App </h3>
+<% if(userId) { %>
+  <h4>
+    Current User: <%= userId %>
+  </h4>
+  <div>
+    <form method = POST action = "/logout">
+    <button style = "width: 150px" type =  "submit">Logout</<button>
+    </form>
+  </div>
+  <div>
+      <a href="http://localhost:8080/urls" style = "display:inline">My Links</a>
+  </div>
+<% } else { %>
+    <a href="http://localhost:8080/register">Register</a>
+    <a href="http://localhost:8080/Login">Login</a>
+<% } %>
+</br>

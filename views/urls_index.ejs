@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./partials/_header.ejs %>
+</head>
+<body>
+  <table  text-align: center; border=1>
+      <tr>
+        <th>Short Url</th>
+        <th>Website</th>
+        <th colspan=2>Links</th>
+      </tr>
+      <% for(let key in urls) { %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= urls[key] %></td>
+        <td>
+          <form method="POST" action="/urls/<%= key %>/delete" style="display: inline;" >
+            <button action = "submit">Delete</button>
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="/urls/<%= key %>/update" style="display: inline;">
+            <input type = "text" name = "longURL" placeholder="http://" ></input>
+            <button action = "submit">Update</button>
+          </form>
+        </td>
+      </tr>
+
+      <% } %>
+    </table>
+    </br>
+      <a href="http://localhost:8080/urls/new "> Click here to create new short Url link </a>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "tinyapp",
+  "version": "0.0.1",
+  "description": "Url Shortner",
+  "main": "express_server.js",
+  "scripts": {
+    "start": "nodemon express_server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abrahamliju/Tiny_App.git"
+  },
+  "author": "Liju",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abrahamliju/Tiny_App/issues"
+  },
+  "homepage": "https://github.com/abrahamliju/Tiny_App#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.16.1",
+    "cookie-session": "^2.0.0-alpha.3",
+    "express": "^4.14.1",
+    "nodemon": "^1.11.0"
+  }
+}
