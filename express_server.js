@@ -20,6 +20,17 @@ function generateRandomString() {
     return text;
 }
 
+function checkUrlsinObj(urlObj, shortUrl) {
+  for(let email in urlObj){
+    for(let shUrl in urlObj[email]){
+      if(shortUrl === shUrl){
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 let urlDatabase = {
 
 };
@@ -39,7 +50,7 @@ app.get("/register", (req, res) => {
 
 app.post("/register", (req, res) => {
   if(req.body.username in users){
-    res.status(400).send("User already exists. Please login <a href ='/login'>Login</a>")
+    res.status(400).send("User already exists. Please login <a href ='/login'>Click Here</a>")
   }
   if(req.body.password === "" || req.body.username === ""){
     res.status(400).send("Please enter a Valid Email Address and Password");
@@ -86,7 +97,7 @@ app.get("/urls",(req, res) => {
                        };
     res.status(200).render("urls_index", templateVars);
   } else {
-      res.status(401).redirect("/login");
+      res.status(401).send("Please Login <a href ='/login'>Click Here</a>");
   }
 });
 
@@ -96,14 +107,14 @@ app.get("/urls/new", (req, res) => {
     templateVars.userId = req.session.cookieId;
     res.status(200).render("urls_new", templateVars);
   } else {
-    res.status(401).send("Please login <a href ='/login'>Login</a> ")
+    res.status(401).send("Please login <a href ='/login'>Click Here</a> ")
   }
 });
 
 app.get("/urls/:id", (req, res) => {
   let shortUrl = req.params.id;
   if(req.session.cookieId){
-    if(shortUrl in urlDatabase[req.session.cookieId]){
+    if(checkUrlsinObj(urlDatabase, shortUrl)){
       if(req.params.id in urlDatabase[req.session.cookieId]){
         let longUrl = urlDatabase[req.session.cookieId][shortUrl];
         let templateVars = {}
@@ -118,7 +129,7 @@ app.get("/urls/:id", (req, res) => {
       res.status(404).send("The requested short url does not exist");
     }
   } else {
-      res.status(401).send("Please login <a href ='/login'>Login</a>")
+      res.status(401).send("Please login <a href ='/login'>Click Here</a>")
   }
 });
 
@@ -135,7 +146,7 @@ app.post("/urls/create", (req, res) => {
     console.log(urlDatabase);
     res.redirect("/urls");
   } else {
-    res.status(401).send("Please login to make changes <a href ='/login'>Login</a>")
+    res.status(401).send("Please login to make changes <a href ='/login'>Click Here</a>")
   }
 });
 
